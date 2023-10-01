@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Booking Form</title>
+</head>
+<body>
+    <h1>Restaurant Booking Form</h1>
+    
+    <div id="bookingForm">
+        <label for="bookingType">Choice of Booking:</label>
+        <select id="bookingType" onchange="showBookingOptions()">
+            <option value="fullDay">Full Day Booking</option>
+            <option value="halfDay">Half Day Booking</option>
+            <option value="hourly">Hourly Booking</option>
+        </select>
+
+        <br>
+
+        <div id="bookingOptions">
+            <!-- Additional options will be added here dynamically -->
+        </div>
+    </div>
+
+    <script>
+        function showBookingOptions() {
+            const bookingType = document.getElementById("bookingType").value;
+            const bookingOptions = document.getElementById("bookingOptions");
+
+            // Clear previous options
+            while (bookingOptions.firstChild) {
+                bookingOptions.removeChild(bookingOptions.firstChild);
+            }
+
+            if (bookingType === "fullDay") {
+                // Only Date option is available for full day booking
+                const dateLabel = document.createElement("label");
+                dateLabel.textContent = "Date:";
+                const dateInput = document.createElement("input");
+                dateInput.type = "date";
+
+                bookingOptions.appendChild(dateLabel);
+                bookingOptions.appendChild(dateInput);
+            } else if (bookingType === "halfDay") {
+                // Date and Slot options are available for half day booking
+                const dateLabel = document.createElement("label");
+                dateLabel.textContent = "Date:";
+                const dateInput = document.createElement("input");
+                dateInput.type = "date";
+
+                const slotLabel = document.createElement("label");
+                slotLabel.textContent = "Slot:";
+                const slotSelect = document.createElement("select");
+                const slotOptions = ["Breakfast", "Lunch", "Dinner"];
+                for (const option of slotOptions) {
+                    const slotOption = document.createElement("option");
+                    slotOption.value = option;
+                    slotOption.textContent = option;
+                    slotSelect.appendChild(slotOption);
+                }
+
+                bookingOptions.appendChild(dateLabel);
+                bookingOptions.appendChild(dateInput);
+                bookingOptions.appendChild(slotLabel);
+                bookingOptions.appendChild(slotSelect);
+            } else if (bookingType === "hourly") {
+                // Date and Time options are available for hourly booking
+                const dateLabel = document.createElement("label");
+                dateLabel.textContent = "Date:";
+                const dateInput = document.createElement("input");
+                dateInput.type = "date";
+
+                const timeLabel = document.createElement("label");
+                timeLabel.textContent = "Time:";
+                const timeInput = document.createElement("input");
+                timeInput.type = "time";
+
+                bookingOptions.appendChild(dateLabel);
+                bookingOptions.appendChild(dateInput);
+                bookingOptions.appendChild(timeLabel);
+                bookingOptions.appendChild(timeInput);
+            }
+        }
+    </script>
+</body>
+</html>
